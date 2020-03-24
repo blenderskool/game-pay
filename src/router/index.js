@@ -24,4 +24,11 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (['Game'].includes(to.name) && !localStorage.getItem('game'))
+    next({ name: 'Home' })
+
+  next()
+})
+
 export default router
