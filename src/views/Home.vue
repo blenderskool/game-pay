@@ -1,16 +1,29 @@
 <template>
-  <div class="home">
+  <div class="bg-gray-200 h-screen flex flex-col items-center justify-center">
     
-    <div class="players">
-      <ul>
-        <li :key="i" v-for="(player, i) in players">
-          <h2>{{ player.name }}</h2>
-          <h3>
+    <div class="bg-white p-5 rounded shadow-xl w-9/12">
+      <ul
+        class="p-0 mb-6 list-none"
+        v-if="Object.keys(players).length"
+      >
+        <li
+          :key="id"
+          v-for="(player, id) in players"
+          class="p-2 flex"
+        >
+          <h2 class="m-0 font-medium text-xl">{{ player.name }}</h2>
+          <h3 class="ml-auto font-semibold text-base text-green-500">
             +{{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(player.amount) }}
           </h3>
         </li>
       </ul>
-      <button class="add-player" @click="newPlayer.modal = true">
+      <div class="mb-6 text-center text-gray-600" v-else>
+        Start by adding 2 or more players
+      </div>
+      <button
+        class="w-full bg-transparent border-2 border-solid border-blue-200 text-blue-400"
+        @click="newPlayer.modal = true"
+      >
         Add a player
       </button>
     </div>
@@ -19,26 +32,46 @@
       <NFCReader v-model="newPlayer.id" />
 
       <form @submit.prevent="addPlayer">
-        <label>
+        <label class="text-gray-700 block my-4">
           Name*
           <input type="text" v-model="newPlayer.name" required>
         </label>
-        <label>
+        <label class="text-gray-700 block my-4">
           Amount*
           <input type="number" v-model="newPlayer.amount" required>
         </label>
-        <label>
+        <label class="text-gray-700 block my-4">
           Card
           <input type="text" v-model="newPlayer.id" disabled>
         </label>
-        <button class="primary" type="submit" style="width: 100%">
+
+        <p
+          class="text-center text-red-500 mb-5"
+          v-if="newPlayer.id in players"
+        >
+          Player already exists.
+          <br>
+          Try adding a different card.
+        </p>
+
+        <button
+          class="primary"
+          type="submit"
+          style="width: 100%"
+          :disabled="newPlayer.id in players"
+        >
           Add player
         </button>
       </form>
     </Modal>
 
 
-    <button class="primary start-game" :disabled="players.length < 2">
+    <button
+      class="primary fixed w-4/6"
+      style="bottom: 30px"
+      :disabled="players.length < 2"
+      @click="startGame"
+    >
       Start game!
     </button>
   </div>
@@ -62,20 +95,21 @@ export default {
         name: '',
         amount: 0,
       },
-      players: [],
+      players: {},
     }
   },
   methods: {
     addPlayer() {
-      this.players.push({
+      // if (!this.newPlayer.id) return;
+
+      this.players[this.newPlayer.id] = {
         name: this.newPlayer.name,
-        id: this.newPlayer.id,
         amount: this.newPlayer.amount,
         transactions: this.newPlayer.amount ? [{
           type: 'collect',
           amount: this.newPlayer.amount
         }] : []
-      });
+      };
       
       this.newPlayer = {
         modal: false,
@@ -83,77 +117,11 @@ export default {
         name: '',
         amount: 0,
       };
+    },
+    startGame() {
+      localStorage.setItem('game', JSON.stringify(this.players));
+      this.$router.push('/game')
     }
   }
 }
 </script>
-
-<style scoped>
-
-  .home {
-    background-color: #EDF2F7;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .players {
-    background-color: #ffffff;
-    padding: 1.25rem;
-    border-radius: 4px;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
-    width: 75%;
-  }
-
-  .players ul {
-    padding: 0;
-    margin: 0 0 1.5rem;
-    list-style: none;
-  }
-  .players ul:empty::before {
-    content: 'Start by adding 2 players';
-    text-align: center;
-    width: 100%;
-    display: block;
-    color: #718096;
-  }
-
-  .players li {
-    padding: 0.5rem;
-    display: flex;
-  }
-  .players li h2 {
-    margin: 0;
-    font-weight: 500;
-    font-size: 1.25rem;
-  }
-  .players li h3 {
-    margin: 0;
-    font-weight: 600;
-    margin-left: auto;
-    font-size: 1rem;
-    color: #48BB78;
-  }
-  
-  .add-player {
-    width: 100%;
-    background-color: transparent;
-    border: 2px solid #BEE3F8;
-    color: #63B3ED;
-  }
-
-  .start-game {
-    position: fixed;
-    bottom: 30px;
-    width: 66%;
-  }
-
-  form label {
-    color: #4A5568;
-    display: block;
-    margin: 1rem 0;
-  }
-
-</style>
