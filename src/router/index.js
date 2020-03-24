@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Game from '../views/Game.vue'
+import Transact from '../views/Transact.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/game',
     name: 'Game',
     component: Game
+  },
+  {
+    path: '/transact/:id',
+    name: 'Transact',
+    component: Transact
   }
 ]
 
@@ -25,7 +31,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (['Game'].includes(to.name) && !localStorage.getItem('game'))
+  if (['Game', 'Transact'].includes(to.name) && !localStorage.getItem('game'))
     next({ name: 'Home' })
 
   next()
