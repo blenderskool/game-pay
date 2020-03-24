@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="justify-center">
     
     <div class="bg-white p-5 rounded shadow-xl w-9/12">
       <ul
@@ -33,11 +33,11 @@
 
       <form @submit.prevent="addPlayer">
         <label class="text-gray-700 block my-4">
-          Name*
+          Name
           <input type="text" v-model="newPlayer.name" required>
         </label>
         <label class="text-gray-700 block my-4">
-          Amount*
+          Amount
           <input type="number" v-model="newPlayer.amount" required>
         </label>
         <label class="text-gray-700 block my-4">
@@ -104,7 +104,7 @@ export default {
 
       this.players[this.newPlayer.id] = {
         name: this.newPlayer.name,
-        amount: this.newPlayer.amount,
+        amount: parseInt(this.newPlayer.amount),
         transactions: this.newPlayer.amount ? [{
           type: 'collect',
           amount: this.newPlayer.amount
@@ -123,6 +123,12 @@ export default {
 
       localStorage.setItem('game', JSON.stringify(this.players));
       this.$router.push('/game');
+    }
+  },
+  created() {
+    const game = localStorage.getItem('game');
+    if (game) {
+      this.players = JSON.parse(game);
     }
   }
 }

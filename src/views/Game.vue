@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="justify-center">
 
     <div class="w-9/12 text-center py-20 mb-5 -mt-24 border-2 border-dotted border-blue-300 rounded-md text-blue-400">
       <NFCReader v-model="playerId" />
@@ -56,7 +56,7 @@ export default {
   },
   watch: {
     playerId() {
-      this.$router.push({ path: '/transact', query: { id: escape(this.playerId) } });
+      this.$router.push({ path: '/transact', params: { id: escape(this.playerId) } });
     }
   },
   methods: {
