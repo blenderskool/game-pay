@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 h-screen flex flex-col items-center justify-center">
+  <div>
     
     <div class="bg-white p-5 rounded shadow-xl w-9/12">
       <ul
@@ -69,7 +69,7 @@
     <button
       class="primary fixed w-4/6"
       style="bottom: 30px"
-      :disabled="players.length < 2"
+      :disabled="Object.keys(players).length < 2"
       @click="startGame"
     >
       Start game!
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     addPlayer() {
-      // if (!this.newPlayer.id) return;
+      if (!this.newPlayer.id) return;
 
       this.players[this.newPlayer.id] = {
         name: this.newPlayer.name,
@@ -119,8 +119,10 @@ export default {
       };
     },
     startGame() {
+      if (Object.keys(this.players).length < 2) return;
+
       localStorage.setItem('game', JSON.stringify(this.players));
-      this.$router.push('/game')
+      this.$router.push('/game');
     }
   }
 }
