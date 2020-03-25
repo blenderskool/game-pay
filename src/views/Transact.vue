@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     activePlayerId() {
-      return unescape(this.$route.params.id);
+      return this.$route.params.id;
     },
     players() {
       return JSON.parse(localStorage.getItem('game'));

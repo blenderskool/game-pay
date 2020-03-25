@@ -56,7 +56,7 @@ export default {
   },
   watch: {
     playerId() {
-      this.$router.push({ path: '/transact', params: { id: escape(this.playerId) } });
+      this.$router.push(`/transact/${this.playerId}`);
     }
   },
   methods: {
