@@ -3,34 +3,13 @@
     <h3 class="text-2xl text-center font-semibold mt-10">{{ players[activePlayerId].name }}</h3>
     
     <form class="mt-32 w-9/12" @submit.prevent="transact">
-
       <div class="flex">
-        <label
-          class="bg-white block text-center rounded text-green-500 mr-2 w-full py-5 shadow border-solid border-green-500 text-lg"
-          :class="{'border-2': type === 'collect'}"
-        >
+        <MegaChoice name="type" inputValue="collect" v-model="type" overrideClass="border-green-500 text-green-500">
           Collect
-          <input
-            v-model="type"
-            class="hidden"
-            type="radio"
-            name="type"
-            value="collect"
-          >
-        </label>
-        <label
-          class="bg-white block text-center rounded text-red-500 ml-2 w-full py-5 shadow border-solid border-red-500 text-lg"
-          :class="{'border-2': type === 'pay'}"
-        >
+        </MegaChoice>
+        <MegaChoice name="type" inputValue="pay" v-model="type" overrideClass="border-red-500 text-red-500">
           Pay
-          <input
-            v-model="type"
-            class="hidden"
-            type="radio"
-            name="type"
-            value="pay"
-          >
-        </label>
+        </MegaChoice>
       </div>
 
       <FormInput class="my-10" v-model="amount" type="number" required>
@@ -42,34 +21,18 @@
         <span v-else-if="type === 'collect'">From</span>
       </div>
       <div class="flex">
-        <label
-          class="bg-white block text-center rounded text-blue-500 mr-2 w-full py-5 shadow border-solid border-blue-500 text-lg"
-          :class="{'border-2': to === '0'}"
-        >
+        <MegaChoice name="to" inputValue="0" v-model="to">
           Bank
-          <input
-            v-model="to"
-            class="hidden"
-            type="radio"
-            name="to"
-            value="0"
-          >
-        </label>
-        <label
-          class="bg-white block text-center rounded text-blue-500 ml-2 w-full py-5 shadow border-solid border-blue-500 text-lg"
-          :class="{'border-2': to === i}"
-          :key="i"
+        </MegaChoice>
+        <MegaChoice
           v-for="(player, i) in opponents"
+          :key="i"
+          name="to"
+          :inputValue="i"
+          v-model="to"
         >
           {{ player.name }}
-          <input
-            v-model="to"
-            class="hidden"
-            type="radio"
-            name="to"
-            :value="i"
-          >
-        </label>
+        </MegaChoice>
       </div>
 
       <button
@@ -91,11 +54,13 @@
 
 <script>
 import FormInput from '@/components/FormInput.vue';
+import MegaChoice from '@/components/MegaChoice.vue';
 
 export default {
   name: 'Transact',
   components: {
     FormInput,
+    MegaChoice,
   },
   data() {
     return {
