@@ -1,4 +1,4 @@
-# elg
+# GamePay
 
 ## Project setup
 ```

@@ -1,7 +1,8 @@
 {
-  "name": "elg",
+  "name": "game-pay",
   "version": "0.1.0",
   "private": true,
+  "author": "Akash Hamirwasia",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
