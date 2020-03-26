@@ -2,15 +2,8 @@
   <div class="justify-center">
     
     <div class="bg-white p-5 rounded shadow-xl w-9/12">
-      <ul
-        class="p-0 mb-6 list-none"
-        v-if="Object.keys(players).length"
-      >
-        <li
-          :key="id"
-          v-for="(player, id) in players"
-          class="p-2 flex"
-        >
+      <ul class="p-0 mb-6 list-none" v-if="Object.keys(players).length">
+        <li :key="id" v-for="(player, id) in players" class="p-2 flex">
           <h2 class="m-0 font-medium text-xl">{{ player.name }}</h2>
           <h3 class="ml-auto font-semibold text-base text-green-500">
             +{{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(player.amount) }}
@@ -32,23 +25,17 @@
       <NFCReader v-model="newPlayer.id" />
 
       <form @submit.prevent="addPlayer">
-        <label class="text-gray-700 block my-4">
+        <FormInput type="text" v-model="newPlayer.name" required>
           Name
-          <input type="text" v-model="newPlayer.name" required>
-        </label>
-        <label class="text-gray-700 block my-4">
-          Amount
-          <input type="number" v-model="newPlayer.amount" required>
-        </label>
-        <label class="text-gray-700 block my-4">
+        </FormInput>
+        <FormInput type="number" v-model="newPlayer.amount" required>
+          Initial Amount
+        </FormInput>
+        <FormInput type="text" v-model="newPlayer.id" placeholder="Bring RFID card closer to NFC sensor" disabled>
           Card
-          <input type="text" v-model="newPlayer.id" disabled>
-        </label>
+        </FormInput>
 
-        <p
-          class="text-center text-red-500 mb-5"
-          v-if="newPlayer.id in players"
-        >
+        <p class="text-center text-red-500 mb-5" v-if="newPlayer.id in players">
           Player already exists.
           <br>
           Try adding a different card.
@@ -79,12 +66,14 @@
 
 <script>
 import Modal from '@/components/Modal.vue';
+import FormInput from '@/components/FormInput.vue';
 import NFCReader from '@/components/NFCReader.vue';
 
 export default {
   name: 'Home',
   components: {
     Modal,
+    FormInput,
     NFCReader,
   },
   data() {

@@ -33,10 +33,9 @@
         </label>
       </div>
 
-      <label class="text-gray-700 block my-10">
+      <FormInput class="my-10" v-model="amount" type="number" required>
         Amount
-        <input v-model="amount" type="number" required>
-      </label>
+      </FormInput>
 
       <div class="text-gray-700">
         <span v-if="type === 'pay'">To</span>
@@ -91,8 +90,13 @@
 </template>
 
 <script>
+import FormInput from '@/components/FormInput.vue';
+
 export default {
   name: 'Transact',
+  components: {
+    FormInput,
+  },
   data() {
     return {
       type: 'pay',
