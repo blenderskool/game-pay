@@ -11,11 +11,9 @@
       <li
         :key="i"
         v-for="(player, i) in players"
-        class="bg-white p-4 rounded text-center shadow-md"
+        class="bg-white p-4 rounded text-center shadow-sm"
       >
-        <div
-          class="w-8 h-8 rounded-full bg-blue-500 inline-block"
-        />
+        <div class="w-8 h-8 rounded-full bg-blue-500 inline-block" />
         <h2 class="mt-3 font-medium text-2xl">
           {{ player.name }}
         </h2>
