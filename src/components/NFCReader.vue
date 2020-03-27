@@ -1,10 +1,19 @@
 <template>
-  
+  <audio ref="scan" hidden>
+    <source src="/scan.mp3" type="audio/mpeg">
+  </audio>
 </template>
 
 <script>
+
 export default {
   name: 'NFCReader',
+  props: {
+    silent: {
+      type: Boolean,
+      default: false,
+    },
+  },
   created() {
     
     try {
@@ -16,6 +25,12 @@ export default {
           console.log("Cannot read data from the NFC tag. Try another one?");
         };
         reader.onreading = event => {
+          // Play scan audio
+          if (!this.silent) {
+            this.$refs.scan.play();
+          }
+
+          // Emit the serial number of the tag
           this.$emit('input', event.serialNumber);
         };
       }).catch(error => {
