@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrapper" @click="$emit('input', false)" v-if="value">
-    <div class="modal" @click.stop>
+    <div class="bg-gray-800 modal" @click.stop>
       <slot />
     </div>
   </div>
@@ -31,7 +31,6 @@ export default {
   .modal {
     border-radius: 4px;
     padding: 1.25rem;
-    background-color: #ffffff;
     width: 80%;
     box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
   }

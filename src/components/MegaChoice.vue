@@ -1,5 +1,5 @@
 <template>
-  <label :class="`bg-white block text-center rounded mr-2 w-full py-5 shadow border-solid text-lg cursor-pointer ${style} ${value === inputValue && activeStyle}`">
+  <label :class="`bg-gray-800 block text-center rounded mr-2 w-full py-5 shadow border-solid text-lg cursor-pointer ${style} ${value === inputValue && activeStyle}`">
     <slot />
     <input @input="handleInput" class="hidden" type="radio" :name="name" :value="inputValue">
   </label>

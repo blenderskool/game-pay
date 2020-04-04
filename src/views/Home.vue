@@ -1,7 +1,7 @@
 <template>
   <div class="justify-center">
     
-    <div class="bg-white p-5 rounded shadow-xl w-9/12">
+    <div class="bg-gray-800 text-gray-100 p-5 rounded shadow-xl w-9/12">
       <ul class="p-0 mb-6 list-none" v-if="Object.keys(players).length">
         <li :key="id" v-for="(player, id) in players" class="p-2 flex">
           <h2 class="m-0 font-medium text-xl">{{ player.name }}</h2>
@@ -14,7 +14,7 @@
         Start by adding 2 or more players
       </div>
       <button
-        class="w-full bg-transparent border-2 border-solid border-blue-200 text-blue-400"
+        class="w-full bg-transparent border-2 border-solid border-blue-400 text-blue-400"
         @click="newPlayer.modal = true"
       >
         Add a player

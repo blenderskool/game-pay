@@ -1,7 +1,7 @@
 <template>
   <div class="justify-center">
 
-    <div class="w-9/12 text-center py-20 mb-5 -mt-24 border-2 border-dotted border-blue-300 rounded-md text-blue-400">
+    <div class="w-9/12 text-center py-20 mb-5 -mt-24 border-2 border-dotted border-blue-400 rounded-md text-blue-400">
       <NFCReader v-model="playerId" />
       Bring player card here to<br>
       start a transaction
@@ -11,7 +11,7 @@
       <li
         :key="i"
         v-for="(player, i) in players"
-        class="bg-white p-4 rounded text-center shadow-sm"
+        class="bg-gray-800 text-gray-100 p-4 rounded text-center shadow-sm"
       >
         <div class="w-8 h-8 rounded-full bg-blue-500 inline-block" />
         <h2 class="mt-3 font-medium text-2xl">
@@ -24,7 +24,7 @@
     </ul>
 
     <button
-      class="fixed w-4/6 border-2 border-solid border-red-300 text-red-500"
+      class="fixed w-4/6 border-2 border-solid border-red-500 text-red-500"
       style="bottom: 30px"
       @click="endGame"
     >

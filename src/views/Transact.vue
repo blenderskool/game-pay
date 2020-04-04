@@ -1,6 +1,6 @@
 <template>
   <div class="justify-start">
-    <h3 class="text-2xl text-center font-semibold mt-10">{{ players[activePlayerId].name }}</h3>
+    <h3 class="text-2xl text-gray-100 text-center font-semibold mt-10">{{ players[activePlayerId].name }}</h3>
     
     <form class="mt-32 w-9/12" @submit.prevent="transact">
       <div class="flex">
@@ -16,7 +16,7 @@
         Amount
       </FormInput>
 
-      <div class="text-gray-700">
+      <div class="text-gray-500">
         <span v-if="type === 'pay'">To</span>
         <span v-else-if="type === 'collect'">From</span>
       </div>
@@ -37,7 +37,7 @@
 
       <button
         type="submit"
-        class="fixed w-4/6 text-white transform -translate-x-1/2"
+        class="fixed w-4/6 text-gray-900 transform -translate-x-1/2"
         style="bottom: 30px; left: 50%"
         :class="type === 'pay' ? 'bg-red-500' : 'bg-green-500'"
       >
