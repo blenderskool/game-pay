@@ -13,12 +13,9 @@
       <div class="mb-6 text-center text-gray-600" v-else>
         Start by adding 2 or more players
       </div>
-      <button
-        class="w-full bg-transparent border-2 border-solid border-blue-400 text-blue-400"
-        @click="newPlayer.modal = true"
-      >
+      <Button class="text-blue-400 border-blue-400 w-full" variant="secondary" @click="newPlayer.modal = true">
         Add a player
-      </button>
+      </Button>
     </div>
 
     <Modal v-model="newPlayer.modal">
@@ -41,30 +38,20 @@
           Try adding a different card.
         </p>
 
-        <button
-          class="primary"
-          type="submit"
-          style="width: 100%"
-          :disabled="newPlayer.id in players"
-        >
+        <Button class="bg-blue-400 w-full" type="submit" :disabled="newPlayer.id in players">
           Add player
-        </button>
+        </Button>
       </form>
     </Modal>
 
-
-    <button
-      class="primary fixed w-4/6"
-      style="bottom: 30px"
-      :disabled="Object.keys(players).length < 2"
-      @click="startGame"
-    >
+    <Button class="bg-blue-400 fixed w-4/6" style="bottom: 30px" :disabled="Object.keys(players).length < 2" @click="startGame">
       Start game!
-    </button>
+    </Button>
   </div>
 </template>
 
 <script>
+import Button from '@/components/Button.vue';
 import Modal from '@/components/Modal.vue';
 import FormInput from '@/components/FormInput.vue';
 import NFCReader from '@/components/NFCReader.vue';
@@ -72,6 +59,7 @@ import NFCReader from '@/components/NFCReader.vue';
 export default {
   name: 'Home',
   components: {
+    Button,
     Modal,
     FormInput,
     NFCReader,

@@ -11,7 +11,7 @@
       <li
         :key="i"
         v-for="(player, i) in players"
-        class="bg-gray-800 text-gray-100 p-4 rounded text-center shadow-sm"
+        class="bg-gray-800 text-gray-100 p-4 rounded text-center shadow-md"
       >
         <div class="w-8 h-8 rounded-full bg-blue-500 inline-block" />
         <h2 class="mt-3 font-medium text-2xl">
@@ -23,24 +23,22 @@
       </li>
     </ul>
 
-    <button
-      class="fixed w-4/6 border-2 border-solid border-red-500 text-red-500"
-      style="bottom: 30px"
-      @click="endGame"
-    >
+    <Button class="border-red-800 text-red-800 fixed w-4/6" style="bottom: 30px" @click="endGame" variant="secondary" danger>
       End Game
-    </button>
+    </Button>
 
   </div>
 </template>
 
 <script>
 import NFCReader from '@/components/NFCReader.vue';
+import Button from '@/components/Button.vue';
 
 export default {
   name: 'Game',
   components: {
     NFCReader,
+    Button,
   },
   data() {
     return {

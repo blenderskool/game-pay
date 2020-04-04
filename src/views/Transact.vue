@@ -35,9 +35,9 @@
         </MegaChoice>
       </div>
 
-      <button
+      <Button
         type="submit"
-        class="fixed w-4/6 text-gray-900 transform -translate-x-1/2"
+        class="fixed w-4/6 transform -translate-x-1/2"
         style="bottom: 30px; left: 50%"
         :class="type === 'pay' ? 'bg-red-500' : 'bg-green-500'"
       >
@@ -47,7 +47,7 @@
         <span v-if="type === 'collect'">
           Collect
         </span>
-      </button>
+      </Button>
     </form>
   </div>
 </template>
@@ -55,12 +55,14 @@
 <script>
 import FormInput from '@/components/FormInput.vue';
 import MegaChoice from '@/components/MegaChoice.vue';
+import Button from '@/components/Button.vue';
 
 export default {
   name: 'Transact',
   components: {
     FormInput,
     MegaChoice,
+    Button,
   },
   data() {
     return {
