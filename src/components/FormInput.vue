@@ -3,7 +3,7 @@
     <slot />
     <input
       v-bind="$attrs"
-      class="bg-gray-800 border border-solid border-gray-700 text-gray-300 w-full p-3 rounded outline-none disabled:bg-gray-700"
+      class="bg-gray-800 border border-solid border-gray-700 text-gray-300 w-full p-3 rounded outline-none disabled:bg-gray-700 shadow-inner"
       :value="value"
       @input="handleInput"
     >

@@ -1,5 +1,5 @@
 <template>
-  <label :class="`bg-gray-800 block text-center rounded mr-2 w-full py-5 shadow border-solid text-lg cursor-pointer ${style} ${value === inputValue && activeStyle}`">
+  <label :class="`bg-gray-800 block text-center rounded mr-2 w-full py-5 shadow-lg border-solid text-lg cursor-pointer ${style} ${value === inputValue && activeStyle}`">
     <slot />
     <input @input="handleInput" class="hidden" type="radio" :name="name" :value="inputValue">
   </label>
@@ -28,7 +28,7 @@ export default {
       return this.activeClass;
     },
     style() {
-      if (!this.overrideClass) return 'text-blue-500 border-blue-500';
+      if (!this.overrideClass) return 'text-blue-400 border-blue-400';
 
       return this.overrideClass;
     }
