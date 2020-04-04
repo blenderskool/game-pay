@@ -1,7 +1,4 @@
 <template>
-  <audio ref="scan" hidden>
-    <source src="/scan.mp3" type="audio/mpeg">
-  </audio>
 </template>
 
 <script>
@@ -14,25 +11,35 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      reader: new NDEFReader(),
+    }
+  },
+  methods: {
+    handleReading(event) {
+      // Play scan audio
+      if (!this.silent) {
+        const audio = new Audio('/scan.mp3');
+        audio.play();
+      }
+
+      setTimeout(() => {
+        // Emit the serial number of the tag
+        this.$emit('input', event.serialNumber);
+      }, this.silent ? 550 : 0);
+    },
+    handleError() {
+      console.log("Cannot read data from the NFC tag. Try another one?");
+    },
+  },
   created() {
-    
     try {
-      const reader = new NDEFReader();
 
-      reader.scan().then(() => {
+      this.reader.scan().then(() => {
         console.log("Scan started successfully.");
-        reader.onerror = () => {
-          console.log("Cannot read data from the NFC tag. Try another one?");
-        };
-        reader.onreading = event => {
-          // Play scan audio
-          if (!this.silent) {
-            this.$refs.scan.play();
-          }
-
-          // Emit the serial number of the tag
-          this.$emit('input', event.serialNumber);
-        };
+        this.reader.addEventListener('error', this.handleError);
+        this.reader.addEventListener('reading', this.handleReading);
       }).catch(error => {
         console.log(`Error! Scan failed to start: ${error}.`);
       });
@@ -40,6 +47,10 @@ export default {
     } catch (e) {
       console.log(e);
     }
-  }
+  },
+  beforeDestroy() {
+    this.reader.removeEventListener('error', this.handleError);
+    this.reader.removeEventListener('reading', this.handleReading);
+  },
 }
 </script>
