@@ -18,7 +18,7 @@
           {{ player.name }}
         </h2>
         <h3 class="text-green-500 font-semibold">
-          {{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(player.amount) }}
+          {{ new Intl.NumberFormat('en-IN').format(player.amount) }}
         </h3>
       </li>
     </ul>

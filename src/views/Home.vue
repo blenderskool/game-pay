@@ -6,7 +6,7 @@
         <li :key="id" v-for="(player, id) in players" class="p-2 flex">
           <h2 class="m-0 font-medium text-xl">{{ player.name }}</h2>
           <h3 class="ml-auto font-semibold text-base text-green-500">
-            +{{ new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(player.amount) }}
+            +{{ new Intl.NumberFormat('en-IN').format(player.amount) }}
           </h3>
         </li>
       </ul>
