@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gamepay/utils/players.dart';
 import 'package:gamepay/pages/home.dart';
 import 'package:gamepay/pages/game.dart';
+import 'package:gamepay/pages/transact.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => Home(),
             '/game': (context) => Game(),
+            '/transact': (context) => Transact(),
           },
           initialRoute: '/',
         ));
